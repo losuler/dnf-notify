@@ -74,7 +74,7 @@ if [[ $check_update != 100 ]]; then
     exit 0
 fi
 
-updateinfo="$(dnf updateinfo --info --updates | sed 1d | jq -Rs . | \
+updateinfo="$(dnf updateinfo --info --updates --quiet | jq -Rs . | \
     # Escape double quotes in curl json input
     sed 's/\\"//g' | \
     # Remove leading double quote
