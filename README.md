@@ -21,7 +21,7 @@ However due to the desire to use Matrix and have a different output than just wh
 
 ## Usage
 
-```sh
+```
 Usage: dnf-notify [OPTION]...
 Check for and notify of new updates available.
   -c PATH       Path to the config file
