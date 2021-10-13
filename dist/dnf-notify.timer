@@ -1,0 +1,11 @@
+[Unit]
+Description=Check and notify about dnf updates
+Requires=dnf-notify.service
+
+[Timer]
+Unit=zypper-automatic.service
+OnCalendar=*-*-* 03:00:00
+RandomizedDelaySec=15m
+
+[Install]
+WantedBy=timers.target

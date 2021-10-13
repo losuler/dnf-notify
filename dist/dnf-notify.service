@@ -1,0 +1,8 @@
+[Unit]
+Description=Check and notify about dnf updates
+Wants=dnf-notify.timer
+Requires=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/dnf-notify
