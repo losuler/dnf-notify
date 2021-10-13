@@ -48,7 +48,7 @@ matrix() {
 
     curl -X PUT --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
-        -d "{\"msgtype\":\"m.notice\",
+        -d "{\"msgtype\":\"m.text\",
         \"body\":\"$markdown_body\",
         \"format\":\"org.matrix.custom.html\",
         \"formatted_body\":\"$html_body\"}" \
