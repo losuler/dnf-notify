@@ -17,7 +17,7 @@ A simple bash script to overcome the limitations in notifications in `dnf-automa
 command_format = "curl --silent --output /dev/null --data-urlencode 'chat_id={{ chat_id }}' --data @- 'https://api.telegram.org/bot{{ bot_token }}/sendMessage'"
 ```
 
-However due to the desire to use Matrix and have a different output than just what updates had been automatically installed, along with the added complexity that come with escaping this for `json`, I wrote this simple script to do this for me.
+However due to the desire to use Matrix and have a different output than just what updates had been automatically installed, along with the added complexity that would come with escaping this for `json`, I wrote this simple script to do this for me.
 
 ## Usage
 
