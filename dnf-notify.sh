@@ -41,8 +41,8 @@ matrix() {
     source /etc/os-release
     header="New $NAME updates available!"
     
-    markdown_body="$header\n\`\`\`\n$updateinfo\n\`\`\`"
-    html_body="<p>$header</p>\n<pre><code>$updateinfo</code></pre>\n"
+    markdown_body="$header\n\`\`\`\n$updateinfo_json\n\`\`\`"
+    html_body="<p>$header</p>\n<pre><code>$updateinfo_json</code></pre>\n"
     path="_matrix/client/r0/rooms/$MATRIX_ROOM:$MATRIX_DOMAIN/send/m.room.message"
     query="?access_token=$MATRIX_TOKEN"
 
