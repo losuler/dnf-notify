@@ -85,7 +85,7 @@ if [[ "$updateinfo" == "" ]]; then
         # Remove leading double quote
         sed 's/^\"//g' | \
         # Remove trailing double quote
-        sed 's/\"$//g')"
+        sed 's/\"$//g' || true)"
 else
     updateinfo_json="$(dnf updateinfo --info --updates --quiet | jq -Rs . | \
         # Escape double quotes in curl json input
