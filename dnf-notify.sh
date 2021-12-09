@@ -67,7 +67,8 @@ fi
 source "$CONFIG"
 
 # Ignore and capture exit code
-dnf check-update -q > /dev/null || check_update=$?
+dnf check-update -q > /dev/null
+check_update=$?
 
 if [[ $check_update != 100 ]]; then
     echo "[INFO] No updates available."
