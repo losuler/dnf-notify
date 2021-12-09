@@ -94,6 +94,7 @@ if [[ "$MATRIX" == "enable" ]]; then
     matrix
     echo "[INFO] Updates available, notification sent."
     echo "$updateinfo" > "$LASTMESSAGE"
+    exit 0
 else
     echo "[ERROR] No notification service enabled."
     exit 1
