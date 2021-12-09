@@ -74,16 +74,30 @@ if [[ $check_update != 100 ]]; then
     exit 0
 fi
 
-updateinfo="$(dnf updateinfo --info --updates --quiet | jq -Rs . | \
-    # Escape double quotes in curl json input
-    sed 's/\\"//g' | \
-    # Remove leading double quote
-    sed 's/^\"//g' | \
-    # Remove trailing double quote
-    sed 's/\"$//g')"
+updateinfo="$(dnf updateinfo --info --updates --quiet)"
+
+# Not sure why this is empty sometimes, so fallback on check-update output
+if [[ "$updateinfo" == "" ]]; then
+    # Top line is empty for some reason
+    updateinfo_json="$(dnf check-update --quiet | sed 1d | jq -Rs . | \
+        # Escape double quotes in curl json input
+        sed 's/\\"//g' | \
+        # Remove leading double quote
+        sed 's/^\"//g' | \
+        # Remove trailing double quote
+        sed 's/\"$//g')"
+else
+    updateinfo_json="$(dnf updateinfo --info --updates --quiet | jq -Rs . | \
+        # Escape double quotes in curl json input
+        sed 's/\\"//g' | \
+        # Remove leading double quote
+        sed 's/^\"//g' | \
+        # Remove trailing double quote
+        sed 's/\"$//g')"
+fi
 
 if [[ -f "$LASTMESSAGE" ]]; then
-    if [[ "$updateinfo" == "$(cat $LASTMESSAGE)" ]]; then
+    if [[ "$updateinfo_json" == "$(cat $LASTMESSAGE)" ]]; then
         echo "[INFO] Updateinfo unchanged. No notification required."
         exit 0
     fi
@@ -92,7 +106,7 @@ fi
 if [[ "$MATRIX" == "enable" ]]; then
     matrix
     echo "[INFO] Updates available, notification sent."
-    echo "$updateinfo" > "$LASTMESSAGE"
+    echo "$updateinfo_json" > "$LASTMESSAGE"
     exit 0
 else
     echo "[ERROR] No notification service enabled."
